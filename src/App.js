@@ -18,7 +18,12 @@ function App() {
     //   scale: 0.8,
     // });
     // NEW MODEL
-    const net = facemesh.SupportedModels.MediaPipeFaceMesh;
+    const model = facemesh.SupportedModels.MediaPipeFaceMesh;
+    const detectorConfig = {
+      runtime: 'mediapipe', // or 'tfjs'
+      solutionPath: 'https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh',
+    }
+    const net = await facemesh.createDetector(model, detectorConfig);
     setInterval(() => {
       detect(net);
     }, 10);
@@ -51,7 +56,7 @@ function App() {
       console.log(face);
 
       // Get canvas context
-      const ctx = canvasRef.current.getContext("2d");
+      //const ctx = canvasRef.current.getContext("2d");
       // requestAnimationFrame(()=>{drawMesh(face, ctx)}); 
     }
   };
