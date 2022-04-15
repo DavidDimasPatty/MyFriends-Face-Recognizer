@@ -1,12 +1,10 @@
 import React, { useRef, useEffect } from "react";
-import "./App.css";
 import * as tf from "@tensorflow/tfjs";
-import * as facemesh from "@tensorflow-models/facemesh";
+//import * as facemesh from "@tensorflow-models/facemesh";
 
 // NEW MODEL
-//import * as facemesh from "@tensorflow-models/face-landmarks-detection";
+import * as facemesh from "@tensorflow-models/face-landmarks-detection";
 import Webcam from "react-webcam";
-import { drawMesh } from "./utilities";
 
 function App() {
   const webcamRef = useRef(null);
@@ -20,7 +18,7 @@ function App() {
     //   scale: 0.8,
     // });
     // NEW MODEL
-    const net = await facemesh.load(facemesh.SupportedPackages.mediapipeFacemesh);
+    const net = facemesh.SupportedModels.MediaPipeFaceMesh;
     setInterval(() => {
       detect(net);
     }, 10);
@@ -54,7 +52,7 @@ function App() {
 
       // Get canvas context
       const ctx = canvasRef.current.getContext("2d");
-      requestAnimationFrame(()=>{drawMesh(face, ctx)});
+      // requestAnimationFrame(()=>{drawMesh(face, ctx)}); 
     }
   };
 
